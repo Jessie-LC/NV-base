@@ -2,6 +2,8 @@ layout(location = 0) out vec3 out_color;
 
 /*
 const int colortex0Format = R11F_G11F_B10F; //Scene color
+const int colortex1Format = RGBA16F;
+const int colortex2Format = RGBA32F;
 */
 
 #include "/lib/important.glsl"

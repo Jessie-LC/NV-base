@@ -16,16 +16,18 @@ uniform sampler2D gcolor;
 in vec3 tint;
 in vec2 texture_coordinate;
 in vec2 lightmap_coordinate;
+in float ao;
 
 #ifdef MC_GL_RENDERER_RADEON
     vec3 out_color;
     vec4 out_data;
 #endif
 
-/* DRAWBUFFERS:02 */
+/* DRAWBUFFERS:12 */
 void main() {
     out_color = texture(gcolor, texture_coordinate).rgb * tint;
-    if(texture(gcolor, texture_coordinate).a < 0.01) discard;
+    out_color *= ao;
+    if(texture(gcolor, texture_coordinate).a < 0.1) discard;
 
     out_data.r = 1.0;
     out_data.g = 1.0;

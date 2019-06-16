@@ -1,2 +1,3 @@
 colortex0 = The red, green, and blue channels are used for color, and the alpha channel is used to determine whether or not something is a particle
 colortex1 = entire buffer is used for transparent objects
+colortex2 = red channel is the normal, green channel is the specular map, blue channel is the lightmap, and the alpha channel is IDs

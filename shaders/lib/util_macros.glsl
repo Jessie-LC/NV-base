@@ -6,6 +6,8 @@
 
 #define projMAD3(mat, v) (diagonal3(mat) * (v) + (mat)[3].xyz)
 
+#define land_mask(x) (x < 1.0)
+
 //Used for functions
 #define _saturate(x) clamp(x, 0, 1)
 

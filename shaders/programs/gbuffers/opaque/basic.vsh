@@ -1,6 +1,6 @@
 #ifndef MC_GL_RENDERER_RADEON 
     layout(location = 0) in vec4 vert_pos;
-    layout(location = 3) in vec4 vert_color;
+    layout(location = 3) in vec3 vert_color;
     layout(location = 8) in vec2 vert_texcoord;
     layout(location = 9) in vec2 vert_lmcoord;
 #endif
@@ -15,10 +15,7 @@ uniform mat4 gbufferModelViewInverse;
 uniform mat4 gbufferModelView;
 
 //Vertex outputs
-out vec3 tint;
-out vec2 texture_coordinate;
-out vec2 lightmap_coordinate;
-out float ao;
+flat out vec3 tint;
 
 void main() {
     #ifdef MC_GL_RENDERER_RADEON 
@@ -36,17 +33,7 @@ void main() {
 
     #ifdef MC_GL_RENDERER_RADEON
         tint = gl_Color.rgb;
-
-        texture_coordinate = gl_MultiTexCoord0.st;
-        lightmap_coordinate = gl_MultiTexCoord1.st / 255.0;
-
-        ao = gl_Color.a;
     #else
-        tint = vert_color.rgb;
-
-        texture_coordinate = vert_texcoord;
-        lightmap_coordinate = vert_lmcoord / 255.0;
-
-        ao = vert_color.a;
+        tint = vert_color;
     #endif
 }

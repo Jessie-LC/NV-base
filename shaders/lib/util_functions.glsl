@@ -103,3 +103,21 @@ vec3 log10(in vec3 x) {
 vec4 log10(in vec4 x) {
     return _log10(x, 10.0);
 }
+
+#include "spectral.glsl"
+
+float bayer2  (vec2 c) { c = 0.5 * floor(c); return fract(1.5 * fract(c.y) + c.x); }
+float bayer4  (vec2 c) { return 0.25 * bayer2 (0.5 * c) + bayer2(c); }
+float bayer8  (vec2 c) { return 0.25 * bayer4 (0.5 * c) + bayer2(c); }
+float bayer16 (vec2 c) { return 0.25 * bayer8 (0.5 * c) + bayer2(c); }
+float bayer32 (vec2 c) { return 0.25 * bayer16(0.5 * c) + bayer2(c); }
+float bayer64 (vec2 c) { return 0.25 * bayer32(0.5 * c) + bayer2(c); }
+float bayer128(vec2 c) { return 0.25 * bayer64(0.5 * c) + bayer2(c); }
+
+float linear_bayer2  (float c) { return fract(c * 0.5); }
+float linear_bayer4  (float c) { return 0.5 * linear_bayer2 (c * 0.5) + linear_bayer2(c); }
+float linear_bayer8  (float c) { return 0.5 * linear_bayer4 (c * 0.5) + linear_bayer2(c); }
+float linear_bayer16 (float c) { return 0.5 * linear_bayer8 (c * 0.5) + linear_bayer2(c); }
+float linear_bayer32 (float c) { return 0.5 * linear_bayer16(c * 0.5) + linear_bayer2(c); }
+float linear_bayer64 (float c) { return 0.5 * linear_bayer32(c * 0.5) + linear_bayer2(c); }
+float linear_bayer128(float c) { return 0.5 * linear_bayer64(c * 0.5) + linear_bayer2(c); }
