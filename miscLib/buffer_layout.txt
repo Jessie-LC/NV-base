@@ -1,0 +1,2 @@
+colortex0 = The red, green, and blue channels are used for color, and the alpha channel is used to determine whether or not something is a particle
+colortex1 = entire buffer is used for transparent objects

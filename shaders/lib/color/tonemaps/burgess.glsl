@@ -1,0 +1,1 @@
+vec3 tonemap(in vec3 x) { return (x*(6.2*x+.5))*rcp((x*(6.2*x+1.7)+0.06)); }

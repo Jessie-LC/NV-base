@@ -21,7 +21,7 @@ in vec2 texture_coordinate;
 /* DRAWBUFFERS:0 */
 void main() {
     out_color = texture(gcolor, texture_coordinate).rgb * tint;
-    if(texture(gcolor, texture_coordinate).a < 0.1) discard;
+    if(texture(gcolor, texture_coordinate).a < 0.01) discard;
 
     #ifdef MC_GL_RENDERER_RADEON
         gl_FragData[0] = vec4(out_color, 1.0);

@@ -11,7 +11,6 @@ uniform sampler2D gcolor;
 /* Nothing to see here */
 
 //Fragment inputs
-in vec3 tint;
 in vec2 texture_coordinate;
 
 #ifdef MC_GL_RENDERER_RADEON
@@ -20,7 +19,7 @@ in vec2 texture_coordinate;
 
 /* DRAWBUFFERS:0 */
 void main() {
-    out_color = texture(gcolor, texture_coordinate).rgb * tint;
+    out_color = texture(gcolor, texture_coordinate).rgb;
     if(texture(gcolor, texture_coordinate).a < 0.1) discard;
 
     #ifdef MC_GL_RENDERER_RADEON
