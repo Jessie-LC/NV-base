@@ -136,3 +136,14 @@ float linear_bayer64 (float c) { return 0.5 * linear_bayer32(c * 0.5) + linear_b
 float linear_bayer128(float c) { return 0.5 * linear_bayer64(c * 0.5) + linear_bayer2(c); }
 
 vec2 sincos(float x) { return vec2(sin(x), cos(x)); }
+
+vec2 hash2(vec3 p3) {
+	p3 = fract(p3 * vec3(443.897, 441.423, 437.195));
+	p3 += dot(p3, p3.yzx + 19.19);
+	return fract((p3.xx + p3.yz) * p3.zy);
+}
+
+vec3 gen_unit_vector(vec2 hash) {
+    hash.x *= tau; hash.y = hash.y * 2.0 - 1.0;
+    return vec3(vec2(sin(hash.x), cos(hash.x)) * sqrt(1.0 - hash.y * hash.y), hash.y);
+}

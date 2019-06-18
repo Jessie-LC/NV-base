@@ -43,11 +43,6 @@ vec3 ValueFromSphericalHarmonicCoefficientsAlt(vec4[3] coefficients, vec3 xyz) {
     return vec3(dot(coefficients[0], harmonics), dot(coefficients[1], harmonics), dot(coefficients[2], harmonics));
 }
 
-vec3 gen_unit_vector(vec2 hash) {
-    hash.x *= tau; hash.y = hash.y * 2.0 - 1.0;
-    return vec3(vec2(sin(hash.x), cos(hash.x)) * sqrt(1.0 - hash.y * hash.y), hash.y);
-}
-
 void main() {
     #ifdef MC_GL_RENDERER_RADEON 
         vec4 pos = gl_Vertex;

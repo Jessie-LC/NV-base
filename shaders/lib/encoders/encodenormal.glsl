@@ -18,7 +18,7 @@ vec3 decode_normal3x16(float encoded){
     float z = 1.0 - b.x - b.y;
     vec2 sa = vec2(greaterThanEqual(a, vec2(0.0))) * 2.0 - 1.0;
 
-    vec3 decoded = normalize(vec3(
+    vec3 decoded = fNormalize(vec3(
         z < 0.0 ? (1.0 - b.yx) * sa : a.xy,
         z
     ));

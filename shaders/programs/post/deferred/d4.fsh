@@ -36,7 +36,7 @@ void main() {
     if(land_mask(pd.depth0)) {
         color = apply_shading(color, true);
     } else {
-        color = texture(colortex3, project_sky(normalize(pd.scene_position))).rgb;
+        color = texture(colortex3, project_sky(fNormalize(pd.scene_position))).rgb;
     }
 
     transparent = vec4(0.0);

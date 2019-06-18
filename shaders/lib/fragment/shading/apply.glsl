@@ -33,7 +33,16 @@ vec3 apply_shading(in vec3 col, in bool do_particles) {
 
     vec3 normal = decode_normal3x16(texture(colortex2, texture_coordinate).r);
 
-    vec3 skylight = max(ValueFromSphericalHarmonicCoefficientsAlt(shcoeffs, normal), 0.0);
+    vec3 skylight = vec3(0.0);
+    //if(texture_coordinate.x > 0.5) {
+        skylight = max(ValueFromSphericalHarmonicCoefficientsAlt(shcoeffs, normal), 0.0);
+    /* } else {
+        for(int i = 0; i < 128; ++i) {
+            vec3 dir = mat3(gbufferModelViewInverse) * fNormalize(gen_unit_vector(hash2(pd.view_position + i)));
+            skylight += max(texture(colortex3, project_sky(dir)).rgb * dot(normal, dir), 0.0);
+        }
+        skylight /= 128;
+    } */
 
     if(do_particles && texture(colortex0, texture_coordinate).a < 0.5) skylight = texture(colortex3, project_sky(fNormalize(up_vector))).rgb;
 
