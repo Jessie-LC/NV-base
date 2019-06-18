@@ -19,6 +19,7 @@ uniform vec3 sun_vector, moon_vector, up_vector;
 uniform vec2 view_size, view_pixel_size;
 
 //Fragment inputs
+flat in vec4[3] shcoeffs;
 in vec2 texture_coordinate;
 
 #include "/lib/converters/converters.glsl"

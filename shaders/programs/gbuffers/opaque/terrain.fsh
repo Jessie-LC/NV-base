@@ -14,6 +14,7 @@ uniform sampler2D gcolor;
 
 //Fragment inputs
 in vec3 tint;
+in vec3 flat_normal;
 in vec2 texture_coordinate;
 in vec2 lightmap_coordinate;
 in float ao;
@@ -29,7 +30,7 @@ void main() {
     out_color *= ao;
     if(texture(gcolor, texture_coordinate).a < 0.1) discard;
 
-    out_data.r = 1.0;
+    out_data.r = encode_normal3x16(flat_normal);
     out_data.g = 1.0;
     out_data.b = encode2x16(lightmap_coordinate);
     out_data.a = 1.0;
