@@ -24,6 +24,9 @@ position_depth fill_pd_struct(in vec2 coord) {
 
     pd.screen_position = vec3(coord, pd.depth0);
     pd.end_screen_position = vec3(coord, pd.depth1);
+    pd.view_position = screenspace_to_viewspace(pd.screen_position, gbufferProjectionInverse);
+    pd.end_view_position = screenspace_to_viewspace(pd.end_screen_position, gbufferProjectionInverse);
+    pd.scene_position = viewspace_to_scenespace(pd.view_position, gbufferModelViewInverse);
 
     return pd;
 }

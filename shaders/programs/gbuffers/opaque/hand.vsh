@@ -37,7 +37,7 @@ void main() {
         tint = gl_Color.rgb;
 
         texture_coordinate = gl_MultiTexCoord0.st;
-        lightmap_coordinate = gl_MultiTexCoord0.st / 255.0;
+        lightmap_coordinate = gl_MultiTexCoord1.st / 255.0;
     #else
         tint = vert_color.rgb;
 

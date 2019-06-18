@@ -64,12 +64,11 @@ vec4 cubic_smooth(in vec4 x) {
 }
 
 float rcp(in float x) {
-    const float y = 1.0;
     return _rcp(x, 1.0);
 }
 
-int rcp(in int x) {
-    return _rcp(x, 1);
+float rcp(in int x) {
+    return _rcp(x, 1.0);
 }
 
 vec2 rcp(in vec2 x) {
@@ -104,6 +103,20 @@ vec4 log10(in vec4 x) {
     return _log10(x, 10.0);
 }
 
+#define length2(x) dot(x,x)
+
+vec2 raysphere_intersection(vec3 pos, vec3 dir, float radius) {
+    float radius_squared = (radius*radius);
+    float pos_times_dir = dot(pos, dir);
+    float end_distance = pos_times_dir*pos_times_dir + radius_squared - length2(pos);
+    end_distance = sqrt(end_distance);
+    
+    vec2 ret = -pos_times_dir + vec2(-end_distance, end_distance);
+    if(end_distance < 0.0) ret = vec2(-1.0);
+
+    return ret;
+}
+
 #include "spectral.glsl"
 
 float bayer2  (vec2 c) { c = 0.5 * floor(c); return fract(1.5 * fract(c.y) + c.x); }
@@ -121,3 +134,5 @@ float linear_bayer16 (float c) { return 0.5 * linear_bayer8 (c * 0.5) + linear_b
 float linear_bayer32 (float c) { return 0.5 * linear_bayer16(c * 0.5) + linear_bayer2(c); }
 float linear_bayer64 (float c) { return 0.5 * linear_bayer32(c * 0.5) + linear_bayer2(c); }
 float linear_bayer128(float c) { return 0.5 * linear_bayer64(c * 0.5) + linear_bayer2(c); }
+
+vec2 sincos(float x) { return vec2(sin(x), cos(x)); }

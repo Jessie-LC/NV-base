@@ -1,3 +1,5 @@
 #version 420
 
-#include "/programs/gbuffers/opaque/sky.fsh"
+void main() {
+    discard;
+}
