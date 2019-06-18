@@ -34,7 +34,7 @@ void main() {
 
     color = srgb_to_linear(texture(colortex0, texture_coordinate).rgb);
     if(land_mask(pd.depth0)) {
-        color = apply_shading(color);
+        color = apply_shading(color, true);
     } else {
         color = texture(colortex3, project_sky(normalize(pd.scene_position))).rgb;
     }

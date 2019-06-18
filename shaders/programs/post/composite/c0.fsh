@@ -37,5 +37,5 @@ void main() {
     vec3 transparent_color = srgb_to_linear(texture(colortex1, texture_coordinate).rgb);
     float transparent_alpha = texture(colortex1, texture_coordinate).a;
 
-    if(land_mask(pd.depth0)) color = mix(color * mix(vec3(1.0), transparent_color, transparent_alpha), apply_shading(transparent_color), transparent_alpha);
+    if(land_mask(pd.depth0)) color = mix(color * mix(vec3(1.0), transparent_color, transparent_alpha), apply_shading(transparent_color, false), transparent_alpha);
 }

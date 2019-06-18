@@ -21,7 +21,7 @@ vec3 ValueFromSphericalHarmonicCoefficientsAlt(vec4[3] coefficients, vec3 xyz) {
     return vec3(dot(coefficients[0], harmonics), dot(coefficients[1], harmonics), dot(coefficients[2], harmonics));
 }
 
-vec3 apply_shading(in vec3 col) {
+vec3 apply_shading(in vec3 col, in bool do_particles) {
     vec3 shading = vec3(0.0);
 
     #ifdef SlowBlackbody
@@ -34,6 +34,8 @@ vec3 apply_shading(in vec3 col) {
     vec3 normal = decode_normal3x16(texture(colortex2, texture_coordinate).r);
 
     vec3 skylight = max(ValueFromSphericalHarmonicCoefficientsAlt(shcoeffs, normal), 0.0);
+
+    if(do_particles && texture(colortex0, texture_coordinate).a < 0.5) skylight = texture(colortex3, project_sky(fNormalize(up_vector))).rgb;
 
     shading = pow(decode2x16(texture(colortex2, texture_coordinate).b).x, 3.5) * torch + shading;
     shading = pow(decode2x16(texture(colortex2, texture_coordinate).b).y, 4.0) * (skylight * pi) + shading;
